@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+/* Estilos adicionales */
+body {
+    padding-top: 20px;
+    background-color: rgb(247, 237, 223);
+    background-image: url('../img/backGrounds/madrid.jpg');
+    /* Color de fondo */
+}
+
+hr {
+    border-width: 2px;
+    width: 80%;
+    margin-left: 10%;
+    border-color: #000000;
+}
+
+#descripcion-text {
+    margin: 20px;
+}
+
+#precios-container {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background-color: #ffffff;
+    /* Color de fondo del contenedor */
+    border: 1px solid #dee2e6;
+    /* Borde del contenedor */
+    border-radius: 10px;
+    /* Radio de borde */
+    padding: 20px;
+    /* Sombra */
+    margin-bottom: 50px;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    transition: transform 0.5s ease;
+}
+
+.carousel-inner {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.carousel-item img {
+    max-width: 100%;
+    height: 400px;
+    border-radius: 10px;
+}
+
+.container {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.arrow {
+    font-size: 56px;
+    color: #000000;
+}
+
+.nombre {
+    font-style: normal;
+}
+
+.line-through {
+    position: relative;
+}
+
+.line-through::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    /* Grosor de la línea de tachado */
+    background-color: rgb(233, 89, 32);
+    /* Color de la línea de tachado */
+    transform-origin: top left;
+    transform: rotate(-15deg);
+    /* Angulo de rotación de la línea de tachado */
+    top: 70%;
+}
+
+
+#precio-text {
+    color: rgb(56, 212, 51);
+    font-size: 50px;
+}
+
+#precio-amazon-text {
+    color: red;
+    font-size: 50px;
+}
+
+#cantidad-text {
+    font-size: large;
+}
+
+p,
+h1,
+h2,
+h3,
+strong {
+    font-style: italic;
+}
+
+.numbers {
+    margin: 10px;
+}
+
+
+@media (max-width: 960px) {
+    .container {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .carousel-inner {
+        width: 95%;
+        margin-left: 2.5%;
+        height: 200px;
+    }
+
+    .carousel-item img {
+        max-width: 100%;
+        height: 200px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width:413px) {
+    #precio-text {
+        color: rgb(56, 212, 51);
+        font-size: 30px;
+    }
+
+    #precio-amazon-text {
+        color: red;
+        font-size: 30px;
+    }
+}

@@ -1,0 +1,144 @@
+.material-symbols-outlined {
+    margin-left: 2px;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+.nav-inferior {
+    position: fixed;
+    top: 75%;
+    left: 50%;
+    width: 70%;
+    transform: translate(-50%, -50%);
+    background-color: #eee8e8d4;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    z-index: 2;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para los enlaces */
+.nav-inferior a {
+    text-decoration: none;
+    /* Quitar subrayado */
+    color: inherit;
+    /* Heredar color del texto */
+}
+
+.nav-inferior a:hover {
+    color: #007bff;
+    /* Cambiar color al pasar el mouse */
+}
+
+.invisible {
+    display: none;
+}
+
+a {
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 250px) {
+    .nav-inferior {
+        top: 80%;
+        width: 75%;
+        transform: translate(-50%, -50%);
+    }
+
+    #btn-collapse-categorias {
+        display: block;
+    }
+}
+
+@media (min-width: 575px) {
+    .nav-inferior {
+        top: 80%;
+        width: 75%;
+        transform: translate(-50%, -50%);
+    }
+
+    #btn-collapse-categorias {
+        display: block;
+    }
+}
+
+@media (min-width: 766px) {
+    .nav-inferior {
+        top: 80%;
+        width: 75%;
+        transform: translate(-50%, -50%);
+    }
+
+    #btn-collapse-categorias {
+        display: block;
+    }
+
+}
+
+@media (min-width: 972px) {
+    .nav-inferior {
+        top: 80%;
+        width: 75%;
+        transform: translate(-50%, -50%);
+    }
+
+    #btn-collapse-categorias {
+        display: block;
+    }
+}
+
+@media (min-width: 1116px) {
+
+    .nav-inferior {
+        top: 90%;
+        width: 90%;
+        transform: translate(-50%, -50%);
+    }
+
+    #btn-collapse-categorias {
+        display: block;
+    }
+}
+
+@media (min-width: 1400px) {
+    .nav-inferior {
+        top: 90%;
+        width: 60%;
+        transform: translate(-50%, -50%);
+    }
+
+    #btn-collapse-categorias {
+        display: none;
+    }
+}
+
+#btn-collapse-categorias {
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eee8e8d4;
+    padding: 10px;
+    border: 1px solid #000000;
+    z-index: 2;
+    justify-content: center;
+    color: #000000;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}

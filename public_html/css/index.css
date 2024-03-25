@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+
+body {
+    background-image: url('../img/backGrounds/madrid.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+span {
+    font-weight: bold;
+}
+
+span.white {
+    color: white;
+    font-weight: normal;
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 0.1px solid white;
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+#nav-bar>a:hover {
+    color: black;
+}
+
+main {
+    margin-top: 150px;
+    margin-bottom: 35px;
+}
+
+footer {
+    border-radius: 10px;
+    background-color: (255, 255, 255, 0.2);
+    margin: 1%;
+}
+
+footer>a {
+    -webkit-text-stroke: 1px rgb(103, 100, 100);
+}
+
+h2 {
+    color: white;
+    font-size: 40px;
+    margin: 10px;
+}
+
+.bold-text {
+    color: white;
+    font-size: 40px;
+    margin: 0;
+}
+
+.bold-text:hover {
+    color: black;
+}
+
+.nav-link {
+    color: white;
+    font-size: 40px;
+    margin: 0;
+}
+
+.nav-link :hover {
+    color: black;
+    text-decoration: none;
+}
+
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22m-22 8h22'/%3e%3c/svg%3e");
+}
+
+
+/* HighLight Link*/
+.white {
+    color: white !important;
+}
+
+.black {
+    color: black !important;
+}
+
+.jumbotron {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 25px;
+    height: 350px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.carousel-item img {
+    /*width: 100%;*/
+    height: 400px;
+    /* Ajusta la altura según tus necesidades */
+    object-fit: cover;
+    /* Escalar la imagen para que siempre ocupe todo el contenedor */
+    border-radius: 10px;
+}
+
+.seccion {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    margin-top: 10px;
+}
+
+#text-logo {
+    color: rgb(0, 0, 0);
+    font-size: 40px;
+    margin: 0;
+}
+
+#logo-image {
+    width: 40px;
+    height: 40px;
+    fill: green;
+}
+
+#logo-image:hover {
+    cursor: pointer;
+}
+
+#btn-productos {
+    background-color: rgba(14, 172, 235, 0);
+    -webkit-text-stroke: 0px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid white;
+}
+
+#btn-productos:hover {
+    border: 1px solid rgb(38, 144, 236);
+}
+
+#map {
+    height: 400px;
+    border-radius: 10px;
+}
+
+#map-text {
+    color: white;
+}
+
+@media (max-width:767px) {
+    #text-logo {
+        font-size: 20px;
+    }
+
+    #logo-image {
+        width: 20px;
+        height: 20px;
+    }
+
+    body {
+        background-image: url('../img/backGrounds/fondo-papel.jpg');
+    }
+
+    main {
+        margin-top: 150px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    /* Ancho de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Color de fondo de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Color del control deslizante de la barra de desplazamiento */
+    border-radius: 4px;
+    /* Radio de la esquina del control deslizante */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Color del control deslizante de la barra de desplazamiento al pasar el mouse sobre él */
+}

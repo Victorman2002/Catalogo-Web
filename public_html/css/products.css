@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+body {
+    background-color: rgb(247, 237, 223);
+    /*
+    background-image: url('../img/backGrounds/madrid.jpg');
+    background-position: center;
+    background-size: cover;
+    */
+}
+
+span {
+    font-weight: bold;
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgb(30, 29, 29);
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.nav-text {
+    color: white;
+    font-size: 40px;
+    margin: 0;
+}
+
+.nav-text:hover {
+    color: black;
+}
+
+.nav-link {
+    font-size: 20px;
+    margin: 0;
+    text-decoration: none;
+    color: black;
+}
+
+.form-control {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#logo-image {
+    width: 40px;
+    height: 40px;
+    fill: green;
+}
+
+h1 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    color: white;
+    margin-top: 5%;
+    text-shadow: 3px 3px black;
+}
+
+.card-link {
+    color: inherit;
+    /* Mantener el color del texto igual que el color del padre */
+    text-decoration: none;
+    color: black;
+    /* Quitar el subrayado */
+}
+
+.card-link:hover {
+    color: inherit;
+    /* Mantener el color del texto igual que el color del padre */
+    text-decoration: none;
+    color: black;
+    /* Quitar el subrayado */
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    transition: transform 0.5s ease;
+    padding: 10px;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    z-index: 1;
+    cursor: pointer;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 15px;
+    /*border: 1px solid black;*/
+}
+
+.texto-tachado {
+    text-decoration: line-through;
+    font-weight: normal;
+    color: rgb(238, 70, 70) !important;
+}
+
+.not-price {
+    font-weight: normal;
+    color: #000000 !important;
+}
+
+.category-container {
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eee8e8d4;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    z-index: 2;
+    justify-content: center;
+    margin: 0 auto;
+    backdrop-filter: blur(5px);
+}
+
+.card-body {
+    padding: 5px;
+}
+
+.card-name {
+    /*border: 1px solid black;*/
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    overflow: hidden;
+    height: 58px;
+}
+
+.card-price {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    overflow: hidden;
+    color: rgb(43, 166, 43);
+}
+
+.card-description {
+    /*border: 1px solid black;*/
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 5px;
+    overflow: hidden;
+    height: 100px;
+}
+
+@media (min-width: 992px) {
+    .card-name {
+        display: flex;
+        height: 75px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-description {
+        height: 150px;
+    }
+}
+
+#border-bottom {
+    width: 100%;
+    height: 300px;
+}
+
+#cardsContainer {
+    margin-top: 135px;
+}
+
+#imageGrid {
+    margin-top: 50px;
+}
+
+#search-icon {
+    color: white;
+}
+
+#notFoundMessage {
+    display: none;
+}
+
+@media (max-width: 567px) {
+
+    nav {
+        width: 95%;
+        margin-left: 2.5%;
+    }
+
+    #logo-text {
+        font-size: 20px;
+    }
+
+    .card {
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 360px) {
+
+    #logo-text {
+        font-size: 15px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

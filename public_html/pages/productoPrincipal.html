@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Productos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../css/products.css">
+    <link rel="stylesheet" href="../css/nav-categories.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex text-wrap" href="../index.html">
+                <p class="nav-text text-dark" id="logo-text">Productos Baratos Madrid</p>
+                <img src="../img/logo.svg" id="logo-image" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Producto" aria-label="Buscar"
+                        id="input-search">
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row " id="cardsContainer">
+            <h3 id="notFoundMessage">No se ha encontrado productos que coincidan</h3>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nav-categorias"
+        aria-expanded="false" aria-controls="nav-categorias" id="btn-collapse-categorias">
+        Categorias
+    </button>
+
+    <div class="collapse show" id="nav-categorias">
+
+        <div class="container nav-inferior">
+            <div class="row">
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_todos">Todos <span class="material-symbols-outlined">
+                            language
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_hogar">Hogar <span class="material-symbols-outlined">
+                            cottage
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_cuadros">Cuadros <span class="material-symbols-outlined">
+                            planner_banner_ad_pt
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_lamparas">Lamparas <span class="material-symbols-outlined">
+                            light_group
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_infantil">Infantil <span class="material-symbols-outlined">
+                            child_care
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_minusvalidos">Minusválidos <span class="material-symbols-outlined">
+                            accessible_forward
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_jardineria">Jardineria <span class="material-symbols-outlined">
+                            psychiatry
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_ropa_calzado">Ropa <span class="material-symbols-outlined">
+                            steps
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_electrodomesticos">Electrodomésticos <span class="material-symbols-outlined">
+                            blender
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_animales">Animales <span class="material-symbols-outlined">
+                            raven
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_muebles">Muebles<span class="material-symbols-outlined">
+                            chair
+                        </span></a>
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 item">
+                    <a href="link_de_deportes">Deportes <span class="material-symbols-outlined">
+                            sports_tennis
+                        </span></a>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 item">
+                    <a href="link_de_economicos">Economicos <span class="material-symbols-outlined">
+                            euro
+                        </span></a>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 item">
+                    <a href="link_de_varios">Varios <span class="material-symbols-outlined">
+                            videogame_asset
+                        </span></a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="border-bottom">
+
+        </div>
+
+    </div>
+
+    <script type="module" src="../js/products.js"></script>
+    <script type="module" src="../js/nav-categories.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
