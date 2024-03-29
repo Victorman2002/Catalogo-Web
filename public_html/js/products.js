@@ -1,62 +1,48 @@
-import { getAllProductos, getImagesFromProduct, fetchImage } from "./apiCalls.js";
+import { getAllProductos, getImagesFromProduct, fetchFirstImageName, fetchImage } from "./apiCalls.js";
 
-document.addEventListener('DOMContentLoaded', () => {
+//Array donde estarán cacheados los productos del servidor
+let productsList = [];
 
+document.addEventListener('DOMContentLoaded', async () => {
+
+    await chargeProductsToChache();
     generateCards(productsList);
 
-    const searchInput = document.getElementById('input-search');
-    searchInput.addEventListener("input", handleSearch);
-
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card) => {
-        card.addEventListener('click', () => {
-            console.log(card.id);
-        })
-    })
+    const searchButon = document.getElementById('btn-search');
+    searchButon.addEventListener('click', handleSearch);
 
 })
 
-let productsList = [];
+async function chargeProductsToChache() {
+    productsList = await getAllProductos();
+}
 
-function handleSearch() {
+async function handleSearch() {
     const searchInput = document.getElementById('input-search');
-    console.log(searchInput.value);
+    const notFoundMessage = document.getElementById('notFoundMessage');
+
     const searchTerm = searchInput.value.toLowerCase();
     let filteredProducts = [];
 
     filteredProducts = productsList.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm)
+        product.nombre.toLowerCase().includes(searchTerm)
     );
 
-    generateCards(filteredProducts);
-
     if (filteredProducts.length === 0) {
-        notFoundMessage.style.display = "block";
+        alert('No se han encontrado productos que coincidan')
     } else {
-        notFoundMessage.style.display = "none";
+        await generateCards(filteredProducts);
     }
 }
 
-
 async function generateCards(productsList) {
-    productsList = await getAllProductos();
-    let imgsFromProducts = [];
     const cardsContainer = document.getElementById('cardsContainer');
-
+    cardsContainer.innerHTML = '';
     // Utilizamos un bucle for...of para poder utilizar await dentro del cuerpo del bucle
     for (const product of productsList) {
-        imgsFromProducts = await getImagesFromProduct(product.idProducto);
-        let imagenEnseñada;
-
-        fetchImage(`https://api-images-k796.onrender.com/${imgsFromProducts[0]}`)
-            .then(image => {
-                const imgElement = document.createElement('img');
-                imgElement.src = image.src;
-                imgElement.alt = image.alt;
-                imagenEnseñada = imgElement;
-            });
-
-        console.log(imagenEnseñada)
+        // Obtener la URL de la imagen para el producto actual
+        const imageName = await fetchFirstImageName(product.idProducto);
+        const imageUrl = await fetchImage(imageName.url);
 
         // Creamos una función asíncrona dentro del bucle que espera la resolución de getImagesFromProduct
         async function renderCard() {
@@ -64,7 +50,9 @@ async function generateCards(productsList) {
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <a href="./productoDetalle.html?id=${product.idProducto}" class="card-link">
                         <div class="card" id="${product.id}">
-                            <img src="${imagenEnseñada}" class="card-img-top" alt="Image Product">
+                            <div id="image-card-container">
+                            <img src="${imageUrl}" class="card-img-top" alt="Image Product">
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-name">${product.nombre}</h5>
                                 <p class="card-price"><span class="not-price">Aqui: </span>

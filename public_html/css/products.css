@@ -60,6 +60,10 @@ nav {
     fill: green;
 }
 
+#btn-search:hover {
+    cursor: pointer;
+}
+
 h1 {
     text-align: center;
     font-family: Arial, sans-serif;
@@ -100,13 +104,17 @@ h1 {
     cursor: pointer;
 }
 
-.card-img-top {
+#image-card-container {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    object-position: center;
-    border-radius: 15px;
-    /*border: 1px solid black;*/
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 .texto-tachado {
@@ -178,6 +186,11 @@ h1 {
 
     .card-description {
         height: 150px;
+    }
+
+    .card-img-top {
+        height: auto;
+        /* Cambia la altura a automático para que se ajuste al contenedor */
     }
 }
 

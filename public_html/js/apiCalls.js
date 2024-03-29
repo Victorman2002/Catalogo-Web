@@ -55,19 +55,37 @@ async function getImagesFromProduct(productoId) {
 }
 
 //Modificar la logica para solo tomar una imange del servidor por producto
-async function fetchFirstImage(imageUrl) {
+async function fetchFirstImageName(productoId) {
     try {
-        const response = await fetch(imageUrl);
+        const response = await fetch(`https://api-productos-i184.onrender.com/firstImage/${productoId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) {
             throw new Error('Error al obtener la imagen');
         }
-        const imageBlob = await response.blob();
-        const imageObjectURL = URL.createObjectURL(imageBlob);
-        const image = { src: imageObjectURL, alt: imageUrl };
-        return image;
+        return await response.json();
     } catch (error) {
         console.error('Error al obtener la imagen:', error);
     }
 }
 
-export { getAllProductos, getProducto, getImagesFromProduct, fetchFirstImage as fetchImage };
+async function fetchImage(imageName) {
+    try {
+        const response = await fetch(`https://api-images-k796.onrender.com/images/${imageName}`);
+        if (!response.ok) {
+            throw new Error('Error al obtener la imagen');
+        }
+        const imageBlob = await response.blob(); // Obtener la imagen como un Blob
+        // Crear una URL para visualizar la imagen
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        return imageObjectURL;
+    } catch (error) {
+        console.error('Error al obtener la imagen:', error);
+    }
+}
+
+
+export { getAllProductos, getProducto, getImagesFromProduct, fetchFirstImageName, fetchImage };
