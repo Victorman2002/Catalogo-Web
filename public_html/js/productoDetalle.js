@@ -23,12 +23,13 @@ async function createCard(producto) {
     const precio = document.getElementById('precio-text');
     const precioAmazon = document.getElementById('precio-amazon-text');
     const cantidad = document.getElementById('cantidad-text');
-    const carouselIndicators = document.querySelector('.carousel-indicators');
+    const carouselIndicators = document.querySelector('.carouselIndicators');
     const carouselInner = document.querySelector('.carousel-inner');
 
     //Añadir las imagenes al carousel
     let imageIndex = 0;
     for (const image of productImages) {
+        /*
         if (imageIndex === 0) {
             carouselIndicators.innerHTML += `
             <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
@@ -38,7 +39,7 @@ async function createCard(producto) {
             <li data-target="#carouselIndicators" data-slide-to="${imageIndex}"></li>
         `
         }
-
+*/
         const imageUrl = await fetchImage(image);
         carouselInner.innerHTML += `
         <div class="carousel-item active">
