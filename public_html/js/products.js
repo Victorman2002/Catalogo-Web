@@ -9,7 +9,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     generateCards(productsList);
 
     const searchButon = document.getElementById('btn-search');
+    const searchEnter = document.getElementById('input-search');
+
     searchButon.addEventListener('click', handleSearch);
+
+    searchEnter.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleSearch();
+        }
+    });
 
     //Añadir eventListners a los botones del nav de categorias que filtraran los productos
     const navbtns = document.querySelectorAll('.nav-category-btn');
