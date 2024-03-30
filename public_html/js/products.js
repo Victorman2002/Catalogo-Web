@@ -1,12 +1,12 @@
 import { getAllProductos, getImagesFromProduct, fetchFirstImageName, fetchImage } from "./apiCalls.js";
 
 //Array donde estarán cacheados los productos del servidor
-let productsList = [];
+let cachedProductList = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
 
     await chargeProductsToChache();
-    generateCards(productsList);
+    generateCards(cachedProductList);
 
     const searchButon = document.getElementById('btn-search');
     const searchEnter = document.getElementById('input-search');
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 async function chargeProductsToChache() {
-    productsList = await getAllProductos();
+    cachedProductList = await getAllProductos();
 }
 
 async function handleSearch() {
@@ -40,7 +40,7 @@ async function handleSearch() {
     const searchTerm = searchInput.value.toLowerCase();
     let filteredProducts = [];
 
-    filteredProducts = productsList.filter((product) => {
+    filteredProducts = cachedProductList.filter((product) => {
         return product.nombre.toLowerCase().includes(searchTerm)
     });
 
@@ -55,9 +55,9 @@ function FilterByCategory(clickedCategory) {
     let filteredProducts = []
 
     if (clickedCategory === 'Todos') {
-        generateCards(productsList)
+        generateCards(cachedProductList)
     } else {
-        filteredProducts = productsList.filter((product) => {
+        filteredProducts = cachedProductList.filter((product) => {
             return product.categoria === clickedCategory;
         })
         generateCards(filteredProducts);
@@ -66,12 +66,24 @@ function FilterByCategory(clickedCategory) {
 
 async function generateCards(productsList) {
     const cardsContainer = document.getElementById('cardsContainer');
+    let imagesToCache = []
     cardsContainer.innerHTML = '';
     // Utilizamos un bucle for...of para poder utilizar await dentro del cuerpo del bucle
     for (const product of productsList) {
+
         // Obtener la URL de la imagen para el producto actual
-        const imageName = await fetchFirstImageName(product.idProducto);
-        const imageUrl = await fetchImage(imageName.url);
+        let imageName = await fetchFirstImageName(product.idProducto);
+        imageName = imageName.url;
+        let imageSrc;
+
+        //Si la imagen aun no esta cacheada se hace fetch y se cachea
+        //Si ya esta cacheada se carga de la cache
+        if (!localStorage.getItem(imageName)) {
+            imageSrc = await fetchImage(imageName);
+            imagesToCache.push(imageName);
+        } else {
+            imageSrc = localStorage.getItem(imageName)
+        }
 
         // Creamos una función asíncrona dentro del bucle que espera la resolución de getImagesFromProduct
         async function renderCard() {
@@ -81,7 +93,7 @@ async function generateCards(productsList) {
                         <div class="card" id="${product.id}">
                         <h3 class="card-name">${product.nombre}</h3>
                             <div id="image-card-container">
-                            <img src="${imageUrl}" class="card-img-top" alt="Image Product">
+                            <img src="${imageSrc}" class="card-img-top" alt="Image Product">
                             </div>
                             <div class="card-body">
                                 <p class="card-price"><span class="not-price">Aqui: </span>
@@ -98,8 +110,35 @@ async function generateCards(productsList) {
         // Esperamos la resolución de la función asíncrona antes de continuar con la siguiente iteración del bucle
         await renderCard();
     }
+    //Cachear todas la imagenes no cacheadas
+    await cacheImages(imagesToCache);
 }
 
+// Función para cachear imágenes no cacheadas aun
+async function cacheImages(imageUrls) {
+    for (const url of imageUrls) {
+        // Verificar si la imagen ya está en caché
+        if (!localStorage.getItem(url)) {
+            try {
+                // Si la imagen no está en caché, descargarla y almacenarla en caché
+                const response = await fetch(`https://api-images-k796.onrender.com/images/${url}`);
+                const blob = await response.blob();
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                await new Promise((resolve, reject) => {
+                    reader.onloadend = () => {
+                        const imageData = reader.result;
+                        localStorage.setItem(url, imageData);
+                        resolve();
+                    };
+                    reader.onerror = reject;
+                });
+            } catch (error) {
+                console.error('Error al cachear la imagen:', error);
+            }
+        }
+    }
+}
 
 
 
