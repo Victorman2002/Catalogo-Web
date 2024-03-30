@@ -66,9 +66,17 @@ hr {
     margin-left: 20%;
 }
 
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    border: 0;
+    background-color: #00000000;
+    color: #ffffff;
+    margin: 10px;
+}
+
 .arrow {
-    font-size: 56px;
-    color: #ff0000;
+    font-size: 40px;
 }
 
 .nombre {

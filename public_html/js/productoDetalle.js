@@ -23,47 +23,41 @@ async function createCard(producto) {
     const precio = document.getElementById('precio-text');
     const precioAmazon = document.getElementById('precio-amazon-text');
     const cantidad = document.getElementById('cantidad-text');
-    const carouselIndicators = document.querySelector('.carouselIndicators');
     const carouselInner = document.querySelector('.carousel-inner');
 
     //Añadir las imagenes al carousel
     let imageIndex = 0;
     for (const image of productImages) {
-        /*
+
+        const imageUrl = await fetchImage(image);
+
         if (imageIndex === 0) {
-            carouselIndicators.innerHTML += `
-            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+            carouselInner.innerHTML += `
+            <div class="carousel-item active">
+                <img src="${imageUrl}" class="d-block w-100" alt="Not fetched image">
+            </div>
         `
         } else {
-            carouselIndicators.innerHTML += `
-            <li data-target="#carouselIndicators" data-slide-to="${imageIndex}"></li>
-        `
+            carouselInner.innerHTML += `
+            <div class="carousel-item">
+                <img src="${imageUrl}" class="w-100" alt="Not fetched image">
+            </div>
+            `
         }
-*/
-        const imageUrl = await fetchImage(image);
-        carouselInner.innerHTML += `
-        <div class="carousel-item active">
-            <img src="${imageUrl}" class="d-block w-100" alt="Not fetched image">
-        </div>
-        `
+
         imageIndex++;
     }
 
     //Si hay mas de una imagen en el producto añadir el desplazador del corousel
     if (productImages && productImages.length > 1) {
         carouselInner.innerHTML += `
-        <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-            <span class="material-symbols-outlined arrow">
-                chevron_left
-            </span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-            <span class="material-symbols-outlined arrow">
-                chevron_right
-            </span>
-            <span class="sr-only">Next</span>
-        </a>
+        <button class="carousel-control-prev" type="button" data-target="#carouselControls" data-slide="prev">
+                <span class="material-symbols-outlined arrow">arrow_back_ios</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-target="#carouselControls" data-slide="next">
+                <span class="material-symbols-outlined arrow">arrow_forward_ios</span>
+        </button>
         `
     }
 
