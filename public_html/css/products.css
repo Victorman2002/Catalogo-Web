@@ -96,6 +96,7 @@ h1 {
         rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     transition: transform 0.5s ease;
     padding: 10px;
+    border-radius: 15px;
 }
 
 .card:hover {
@@ -149,12 +150,17 @@ h1 {
 }
 
 .card-name {
-    /*border: 1px solid black;*/
-    border-radius: 10px;
+    /* border: 1px solid black;
+    border-radius: 10px;*/
     padding: 5px;
     text-align: center;
     overflow: hidden;
-    height: 58px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.card-img-top {
+    height: auto;
 }
 
 .card-price {
@@ -164,6 +170,7 @@ h1 {
     text-align: center;
     overflow: hidden;
     color: rgb(43, 166, 43);
+    margin-top: 10px;
 }
 
 .card-description {
@@ -177,11 +184,9 @@ h1 {
 }
 
 @media (min-width: 992px) {
+
     .card-name {
-        display: flex;
-        height: 75px;
-        align-items: center;
-        justify-content: center;
+        font-size: x-large;
     }
 
     .card-description {
@@ -192,6 +197,14 @@ h1 {
         height: auto;
         /* Cambia la altura a automático para que se ajuste al contenedor */
     }
+}
+
+@media (max-width: 1202px) {
+
+    .card-name {
+        font-size: large;
+    }
+
 }
 
 #border-bottom {

@@ -45,6 +45,10 @@
     display: none;
 }
 
+.nav-category-btn:hover {
+    cursor: pointer;
+}
+
 a {
     display: flex;
     align-items: center;

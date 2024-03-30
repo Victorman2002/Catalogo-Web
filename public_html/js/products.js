@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchButon = document.getElementById('btn-search');
     searchButon.addEventListener('click', handleSearch);
 
+    //Añadir eventListners a los botones del nav de categorias que filtraran los productos
+    const navbtns = document.querySelectorAll('.nav-category-btn');
+    navbtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            FilterByCategory(btn.getAttribute('data-filter'))
+        });
+    })
+
 })
 
 async function chargeProductsToChache() {
@@ -19,19 +27,31 @@ async function chargeProductsToChache() {
 
 async function handleSearch() {
     const searchInput = document.getElementById('input-search');
-    const notFoundMessage = document.getElementById('notFoundMessage');
 
     const searchTerm = searchInput.value.toLowerCase();
     let filteredProducts = [];
 
-    filteredProducts = productsList.filter((product) =>
-        product.nombre.toLowerCase().includes(searchTerm)
-    );
+    filteredProducts = productsList.filter((product) => {
+        return product.nombre.toLowerCase().includes(searchTerm)
+    });
 
     if (filteredProducts.length === 0) {
         alert('No se han encontrado productos que coincidan')
     } else {
         await generateCards(filteredProducts);
+    }
+}
+
+function FilterByCategory(clickedCategory) {
+    let filteredProducts = []
+
+    if (clickedCategory === 'Todos') {
+        generateCards(productsList)
+    } else {
+        filteredProducts = productsList.filter((product) => {
+            return product.categoria === clickedCategory;
+        })
+        generateCards(filteredProducts);
     }
 }
 
@@ -50,11 +70,11 @@ async function generateCards(productsList) {
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <a href="./productoDetalle.html?id=${product.idProducto}" class="card-link">
                         <div class="card" id="${product.id}">
+                        <h3 class="card-name">${product.nombre}</h3>
                             <div id="image-card-container">
                             <img src="${imageUrl}" class="card-img-top" alt="Image Product">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-name">${product.nombre}</h5>
                                 <p class="card-price"><span class="not-price">Aqui: </span>
                                     ${(product.precio && typeof product.precio === 'number') ? (product.precio).toFixed(2) : parseFloat(product.precio).toFixed(2)}&euro;<br>
                                     <span class="not-price">Amazon: </span><span class="texto-tachado">${product.precioAmazon}&euro;</span></p>
@@ -70,3 +90,7 @@ async function generateCards(productsList) {
         await renderCard();
     }
 }
+
+
+
+
