@@ -6,8 +6,11 @@ let cardIndexShown = 0;
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+    chargeAnimation(true)
+
     await chargeProductsToChache();
     await generateCards(cachedProductList);
+
     console.log(cardIndexShown);
 
     const searchButon = document.getElementById('btn-search');
@@ -33,9 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 async function chargeProductsToChache() {
-    chargeAnimation(true)
     cachedProductList = await getAllProductos();
-    chargeAnimation(false)
 }
 
 async function handleSearch() {
@@ -70,10 +71,9 @@ function FilterByCategory(clickedCategory) {
 
 async function generateCards(productsList) {
 
-    cardIndexShown = 0;
-
-    //Iniciar la animacion de carga de las cards
     chargeAnimation(true)
+
+    cardIndexShown = 0;
 
     const cardsContainer = document.getElementById('cardsContainer');
     let imagesToCache = []
@@ -103,7 +103,7 @@ async function generateCards(productsList) {
             cardsContainer.innerHTML += `
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <a href="./productoDetalle.html?id=${product.idProducto}" class="card-link">
-                        <div class="card" id="${product.id}">
+                        <div class="card" id="${cardIndexShown}">
                         <h3 class="card-name">${product.nombre}</h3>
                             <div id="image-card-container">
                             <img src="../img/backGrounds/placeholder-image.jpg" data-src="${imageSrc}" class="card-img-top" alt="Image Product">
@@ -181,14 +181,17 @@ function observeIntersection(selector) {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log('Intersected Card')
                 const card = entry.target;
+                console.log('Carta ' + card.id + ' en pantalla')
                 const image = card.querySelector('img');
                 const imageUrl = image.getAttribute('data-src');
                 image.src = imageUrl;
-                observer.unobserve(card);
+                //observer.unobserve(card);
             } else if (!entry.isIntersecting) {
-                console.log('Fuera de la pantalla')
+                const card = entry.target;
+                console.log('Carta ' + card.id + ' fuera de pantalla')
+                const image = card.querySelector('img');
+                image.src = '';
             }
         });
     }, options);
@@ -197,6 +200,10 @@ function observeIntersection(selector) {
     cards.forEach(card => {
         observer.observe(card);
     });
+}
+
+function checkNewChunkGeneration() {
+
 }
 
 
