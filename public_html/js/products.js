@@ -1,22 +1,14 @@
-import { getAllProductos, getImagesFromProduct, fetchFirstImageName, fetchImage } from "./apiCalls.js";
+import { getAllProductos, fetchFirstImageName, fetchImage } from "./apiCalls.js";
 
 //Array donde estarán cacheados los productos del servidor
 let cachedProductList = [];
+let cardIndexShown = 0;
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    //Iniciar la animacion de carga de las cards
-    chargeAnimation(true)
-
     await chargeProductsToChache();
     await generateCards(cachedProductList);
-
-    // Intersection Observer para que solo si las cartas estan visibles se
-    // cargen sus imagenes
-    observeIntersection('.card');
-
-    //Parar la animacion cuando se hayan generado las cards
-    chargeAnimation(false);
+    console.log(cardIndexShown);
 
     const searchButon = document.getElementById('btn-search');
     const searchEnter = document.getElementById('input-search');
@@ -41,7 +33,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 async function chargeProductsToChache() {
+    chargeAnimation(true)
     cachedProductList = await getAllProductos();
+    chargeAnimation(false)
 }
 
 async function handleSearch() {
@@ -76,12 +70,20 @@ function FilterByCategory(clickedCategory) {
 
 async function generateCards(productsList) {
 
+    cardIndexShown = 0;
+
+    //Iniciar la animacion de carga de las cards
+    chargeAnimation(true)
+
     const cardsContainer = document.getElementById('cardsContainer');
     let imagesToCache = []
     cardsContainer.innerHTML = '';
 
     // Utilizamos un bucle for...of para poder utilizar await dentro del cuerpo del bucle
     for (const product of productsList) {
+
+        cardIndexShown++;
+
         // Obtener la URL de la imagen para el producto actual
         let imageName = await fetchFirstImageName(product.idProducto);
         imageName = imageName.url;
@@ -120,7 +122,23 @@ async function generateCards(productsList) {
 
         // Esperamos la resolución de la función asíncrona antes de continuar con la siguiente iteración del bucle
         await renderCard();
+
+        if (cardIndexShown % 12 == 0) {
+            //Parar la animacion cuando se hayan generado las cards
+            chargeAnimation(false);
+        }
+
     }
+
+    // Intersection Observer para que solo si las cartas estan visibles se
+    // cargen sus imagenes
+    observeIntersection('.card');
+
+    //Para cuando se muestran menos de 12 cards se para tambien la animacion
+    if (cardIndexShown < 12) {
+        chargeAnimation(false);
+    }
+
     //Cachear todas la imagenes no cacheadas
     await cacheImages(imagesToCache);
 }
@@ -163,13 +181,14 @@ function observeIntersection(selector) {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log('Intersected')
+                console.log('Intersected Card')
                 const card = entry.target;
                 const image = card.querySelector('img');
                 const imageUrl = image.getAttribute('data-src');
                 image.src = imageUrl;
-
                 observer.unobserve(card);
+            } else if (!entry.isIntersecting) {
+                console.log('Fuera de la pantalla')
             }
         });
     }, options);
@@ -179,6 +198,7 @@ function observeIntersection(selector) {
         observer.observe(card);
     });
 }
+
 
 function chargeAnimation(itsVisible) {
     const animation = document.getElementById('charge-animation');
