@@ -5,8 +5,18 @@ let cachedProductList = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+    //Iniciar la animacion de carga de las cards
+    chargeAnimation(true)
+
     await chargeProductsToChache();
-    generateCards(cachedProductList);
+    await generateCards(cachedProductList);
+
+    // Intersection Observer para que solo si las cartas estan visibles se
+    // cargen sus imagenes
+    observeIntersection('.card');
+
+    //Parar la animacion cuando se hayan generado las cards
+    chargeAnimation(false);
 
     const searchButon = document.getElementById('btn-search');
     const searchEnter = document.getElementById('input-search');
@@ -65,12 +75,13 @@ function FilterByCategory(clickedCategory) {
 }
 
 async function generateCards(productsList) {
+
     const cardsContainer = document.getElementById('cardsContainer');
     let imagesToCache = []
     cardsContainer.innerHTML = '';
+
     // Utilizamos un bucle for...of para poder utilizar await dentro del cuerpo del bucle
     for (const product of productsList) {
-
         // Obtener la URL de la imagen para el producto actual
         let imageName = await fetchFirstImageName(product.idProducto);
         imageName = imageName.url;
@@ -93,7 +104,7 @@ async function generateCards(productsList) {
                         <div class="card" id="${product.id}">
                         <h3 class="card-name">${product.nombre}</h3>
                             <div id="image-card-container">
-                            <img src="${imageSrc}" class="card-img-top" alt="Image Product">
+                            <img src="../img/backGrounds/placeholder-image.jpg" data-src="${imageSrc}" class="card-img-top" alt="Image Product">
                             </div>
                             <div class="card-body">
                                 <p class="card-price"><span class="not-price">Aqui: </span>
@@ -140,5 +151,44 @@ async function cacheImages(imageUrls) {
     }
 }
 
+// Función para observar la intersección de las cartas y cargar las imágenes
+function observeIntersection(selector) {
 
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // Cambia este valor según tus necesidades
+    };
 
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                console.log('Intersected')
+                const card = entry.target;
+                const image = card.querySelector('img');
+                const imageUrl = image.getAttribute('data-src');
+                image.src = imageUrl;
+
+                observer.unobserve(card);
+            }
+        });
+    }, options);
+
+    const cards = document.querySelectorAll(selector);
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+}
+
+function chargeAnimation(itsVisible) {
+    const animation = document.getElementById('charge-animation');
+    const cardsContainer = document.getElementById('cardsContainer');
+
+    if (itsVisible) {
+        animation.style.display = 'block';
+        cardsContainer.classList.add('invisible');
+    } else {
+        animation.style.display = 'none';
+        cardsContainer.classList.remove('invisible');
+    }
+}

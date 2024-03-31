@@ -9,6 +9,7 @@
 
 body {
     background-color: rgb(247, 237, 223);
+    display: flex;
     /*
     background-image: url('../img/backGrounds/madrid.jpg');
     background-position: center;
@@ -30,6 +31,10 @@ nav {
     margin-top: 20px;
     width: 90%;
     margin-left: 5%;
+}
+
+main {
+    text-align: center;
 }
 
 .nav-text {
@@ -62,6 +67,13 @@ nav {
 
 #btn-search:hover {
     cursor: pointer;
+}
+
+#charge-animation {
+    display: none;
+    width: 300px;
+    margin: auto;
+    margin-top: 200px;
 }
 
 h1 {
@@ -181,6 +193,10 @@ h1 {
     margin-bottom: 5px;
     overflow: hidden;
     height: 100px;
+}
+
+.invisible{
+    display: none;
 }
 
 @media (min-width: 992px) {
