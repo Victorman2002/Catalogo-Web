@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     chargeAnimation(true)
 
     await chargeProductsToChache();
+    console.log(cachedProductList);
     await generateCards(cachedProductList);
 
     console.log(cardIndexShown);
@@ -36,7 +37,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 async function chargeProductsToChache() {
-    cachedProductList = await getAllProductos();
+    localStorage.setItem('productsJsonArray', JSON.stringify(await getAllProductos()));
+    cachedProductList = JSON.parse(localStorage.getItem('productsJsonArray'));
 }
 
 async function handleSearch() {

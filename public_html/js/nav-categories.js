@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             navCatergories.classList.remove('show');
             btnCollapse.classList.remove('invisible');
 
-        }, 6000);
+        }, 5000);
     });
 
     //Cuando la pantalla se hace pequeña el nav de las categorias se esconde ya que es muy ancho y en su lugar se muestra el boton de categorias que le sustituye
